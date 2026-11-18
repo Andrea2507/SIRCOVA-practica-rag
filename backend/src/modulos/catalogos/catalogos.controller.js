@@ -15,6 +15,11 @@ export async function listarMunicipios(req, res) {
   res.json(await catalogosService.listarMunicipios(req.usuario, req.query));
 }
 
+export async function obtenerMunicipio(req, res) {
+  const municipio = await catalogosService.obtenerMunicipio(req.usuario, req.params.id);
+  res.json(municipio);
+}
+
 export async function listarDistritos(req, res) {
   res.json(await distritosService.listarDistritos(req.usuario, req.query));
 }

@@ -98,3 +98,17 @@ export async function listarMunicipios(usuario, query = {}) {
     activo: Boolean(f.activo),
   }));
 }
+export async function obtenerMunicipio(usuario, id) {
+  if (!/^[1-9]\d*$/.test(id) || !Number.isSafeInteger(Number(id))) {
+    throw entradaInvalida('El ID del municipio debe ser un entero positivo.');
+  }
+
+  const municipios = await listarMunicipios(usuario);
+  const municipio = municipios.find((item) => item.id === Number(id));
+
+  if (!municipio) {
+    throw new ErrorApi(404, 'MUNICIPIO_NO_ENCONTRADO', 'Municipio no encontrado.');
+  }
+
+  return municipio;
+}
